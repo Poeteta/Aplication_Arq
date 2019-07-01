@@ -2,25 +2,25 @@ version: '3.7'
 
 services:
 
-  users:
+  document:
     build:
-      context: ./services/users
+      context: ./services/documents
       dockerfile: Dockerfile-dev
     volumes:
-      - './services/users:/usr/src/app'
+      - './services/documents:/usr/src/app'
     ports:
       - 5001:5000
     environment:
       - FLASK_ENV=development
       - APP_SETTINGS=project.config.DevelopmentConfig
-      - DATABASE_URL=postgres://postgres:postgres@users-db:5432/users_dev
-      - DATABASE_TEST_URL=postgres://postgres:postgres@users-db:5432/users_test
+      - DATABASE_URL=postgres://postgres:postgres@document-db:5432/documents_dev
+      - DATABASE_TEST_URL=postgres://postgres:postgres@document-db:5432/documents_test
     depends_on:  # nuevo
-      - users-db
+      - document-db
 
-  users-db:  # nuevo
+  document-db:  # nuevo
     build:
-      context: ./services/users/project/db
+      context: ./services/documents/project/db
       dockerfile: Dockerfile
     ports:
       - 5435:5432
