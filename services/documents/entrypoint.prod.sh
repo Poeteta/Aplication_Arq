@@ -1,7 +1,7 @@
 #!/bin/sh
 echo "Esperando a postgres..."
 
-while ! nc -z store-db 5432; do
+while ! nc -z document-db 5432; do
     sleep 0.1
 done
 

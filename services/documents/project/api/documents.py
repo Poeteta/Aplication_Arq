@@ -7,7 +7,6 @@ documents_blueprint = Blueprint('documents', __name__, template_folder='./templa
 
 @documents_blueprint.route('/', methods=['GET'])
 def get_all():
-    """Obteniendo todos los productos"""
     response_object = {
         'status': 'success',
         'data': {
