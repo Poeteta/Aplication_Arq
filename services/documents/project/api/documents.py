@@ -5,7 +5,7 @@ from project.api.models import User, Document, Entity, Documententity, db
 
 documents_blueprint = Blueprint('documents', __name__, template_folder='./templates')
 
-@documents_blueprint.route('/documents', methods=['GET'])
+@documents_blueprint.route('/', methods=['GET'])
 def get_all():
     """Obteniendo todos los productos"""
     response_object = {
