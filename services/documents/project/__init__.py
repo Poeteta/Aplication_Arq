@@ -1,4 +1,4 @@
-# service//users/project/__init__.py
+# service//documents/project/__init__.py
 
 
 import os #nuevo
@@ -29,8 +29,8 @@ def create_app(script_info=None):
     cors.init_app(app)
 
 # register blueprints
-    from project.api.store import store_blueprint
-    app.register_blueprint(store_blueprint)
+    from project.api.documents import documents_blueprint
+    app.register_blueprint(documents_blueprint)
 
 
 # shell context for flask cli

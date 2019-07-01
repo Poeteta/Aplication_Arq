@@ -5,11 +5,9 @@ FROM python:3.7.2-alpine
 # nuevo
 # instalando dependencias
 RUN apk update && \
-   	apk add --virtual build-deps gcc python-dev musl-dev && \
-   	apk add postgresql-dev && \
-  	apk add netcat-openbsd && \
-	apk add bind-tools 
-
+		apk add --virtual build-deps gcc python-dev musl-dev && \
+		apk add postgresql-dev && \
+		apk add netcat-openbsd
 
 # establecer directorio de trabajo
 WORKDIR /usr/src/app
@@ -28,4 +26,5 @@ COPY . /usr/src/app
 
 # ejecutar servidor
 # CMD python manage.py run -h 0.0.0.0
-CMD ["/usr/src/app/entrypoint.sh"]
+#CMD ["/usr/src/app/entrypoint.sh"]
+CMD ["sh","-c","chmod 755 /usr/src/app/entrypoint.sh && /usr/src/app/entrypoint.sh"]
