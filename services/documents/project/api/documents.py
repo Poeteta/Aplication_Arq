@@ -15,12 +15,12 @@ def ping_pong():
         'message':'pong!'
     })
 
-@documents_blueprint.route('/entitys', methods=['GET'])
-def get_all_entitys():
+@documents_blueprint.route('/documents', methods=['GET'])
+def get_all_users():
     response_object = {
         'status': 'success',
         'data': {
-            'entitys': [entity.to_json() for entity in Entity.query.all()]
+            'documents': [document.to_json() for document in Document.query.all()]
         }
     }
     return jsonify(response_object), 200
