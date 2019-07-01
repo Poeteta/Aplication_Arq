@@ -3,6 +3,11 @@
 import unittest
 
 import coverage # new
+from flask.cli import FlaskGroup
+
+from project import create_app, db # new
+from project.api.models import User, Document, Documententity, Entity # new
+
 
 COV = coverage.coverage(
     branch=True,
@@ -13,12 +18,6 @@ COV = coverage.coverage(
     ]
 )
 COV.start()
-
-
-from flask.cli import FlaskGroup
-
-from project import create_app, db # new
-from project.api.models import User, Document, Documententity, Entity # new
 
 app = create_app() # new
 cli = FlaskGroup(create_app=create_app) # new
@@ -42,18 +41,34 @@ def test():
 @cli.command('seed_db')
 def seed_db():
     
-    db.session.add(User(username='Comando', entity_id=1, lastname='Capac', email='capac@gmail.com', password='enlamansiondelosheroes', activate = '0'))
-    db.session.add(User(username='Daniel', entity_id=2, lastname='Pacheco', email='danielpacheco@gmail.com', password='dasdasdasd', activate='1'))
     db.session.add(Document(documentname='Certificado de Estudios post grado', documentcode='C001', documenttype='Certificado', documentprice=19))
     db.session.add(Document(documentname='Certificado de Estudios Pre graddo', documentcode='C001', documenttype='Certificado', documentprice=19))
-    db.session.add(Document(documentname='Record academico post grado', documentcode='C001', documenttype='Record Academico', documentprice=19))
+    db.session.commit()
+    
+
+@cli.command('seed_dbe')
+def seed_db():
+    
+    db.session.add(Entity(entityname = 'Escuela de Ingenieria de Sistemas' , entityplace = 'FIA', entitycode = 'E001' ))
+    db.session.add(Entity(entityname = 'Escuela de Ingenieria Civil' , entityplace = 'FIA' , entitycode = 'E002' ))
+    db.session.commit()
+   
+@cli.command('seed_dbu')
+def seed_db():
+    
+    db.session.add(User(username='Comando', entity_id=1, lastname='Capac', email='capac@gmail.com', password='enlamansiondelosheroes', status = 0))
+    db.session.add(User(username='Daniel', entity_id=2, lastname='Pacheco', email='danielpacheco@gmail.com', password='dasdasdasd', status = 1))
+    db.session.commit()
+    
+
+@cli.command('seed_dbd')
+def seed_db():
+    
     db.session.add(Documententity(document_id=1, entity_id=1))
     db.session.add(Documententity(document_id=2, entity_id=1))
     db.session.add(Documententity(document_id=1, entity_id=2))
-    db.session.add(Entity(entityname='Escuela de Ingenieria de Sistemas', entityplace='FIA', entitycode='E001'))
-    db.session.add(Entity(entityname='Escuela de Ingenieria Civil', entityplace='FIA', entitycode='E002'))
     db.session.commit()
-   
+
 
 # nuevo -> de covertura
 @cli.command()

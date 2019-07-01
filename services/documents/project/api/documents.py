@@ -2,9 +2,6 @@ from flask import Blueprint, jsonify, request, render_template, redirect
 from sqlalchemy import exc
 from project.api.models import User, Document, Entity, Documententity, db
 
-documents_blueprint = Blueprint('documents', __name__)
-
-
 
 documents_blueprint = Blueprint('documents', __name__, template_folder='./templates')
 

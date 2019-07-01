@@ -10,7 +10,7 @@ class User(db.Model):
     lastname = db.Column(db.String(128), nullable=False)
     email = db.Column(db.String(128), nullable=False)
     password = db.Column(db.String(256), nullable=False)
-    active = db.Column(db.Boolean(), default=True, nullable=False)
+    status = db.Column(db.Integer)
     created_date = db.Column(db.DateTime, default=func.now(), nullable=False)
     entity = db.relationship("Entity")
 
@@ -22,7 +22,7 @@ class User(db.Model):
             'lastname': self.lastname,
             'email': self.email,
             'password': self.password,
-            'active': self.active
+            'status': self.status
         }
 
 class Document(db.Model):
@@ -43,7 +43,7 @@ class Document(db.Model):
         }
 
 class Documententity(db.Model):
-    __tablename__='documententity'
+    __tablename__= 'documententity'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     document_id = db.Column(db.Integer, db.ForeignKey('document.id'))
     entity_id = db.Column(db.Integer, db.ForeignKey('entity.id'))
@@ -58,16 +58,16 @@ class Documententity(db.Model):
         }
 
 class Entity(db.Model):
-    __tablename__='entity'
+    __tablename__= 'entity'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     entityname = db.Column(db.String(256), nullable=False)
     entityplace = db.Column(db.String(128), nullable=False)
     entitycode = db.Column(db.String(128), nullable=False)
 
-    def __init__(self):
+    def to_json(self):
         return { 
             'id': self.id,
-            'entityname': self.id,
-            'entityplace': self.id,
+            'entityname': self.entityname,
+            'entityplace': self.entityplace,
             'entitycode': self.entitycode
         }
