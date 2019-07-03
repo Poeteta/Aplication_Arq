@@ -18,8 +18,6 @@ class TestAppService(BaseTestCase):
         self.assertEqual(document.documentcode, 'C002')
         self.assertEqual(document.documenttype, 'Certificado')
         self.assertEqual(document.documentprice, 19)
-
-    
-    
+ 
 if __name__ == '__main__':
     unittest.main()
