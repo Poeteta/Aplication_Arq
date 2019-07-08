@@ -9,6 +9,7 @@ db = SQLAlchemy()
 toolbar = DebugToolbarExtension()
 cors = CORS()
 
+
 def create_app(script_info=None):
     app = Flask(__name__)
 

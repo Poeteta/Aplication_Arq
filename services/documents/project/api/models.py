@@ -2,6 +2,7 @@ from sqlalchemy.sql import func
 from project import db
 from datetime import datetime
 
+
 class User(db.Model):
     __tablename__ = 'user'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -25,8 +26,9 @@ class User(db.Model):
             'status': self.status
         }
 
+
 class Document(db.Model):
-    __tablename__= 'document'
+    __tablename__ = 'document'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     documentname = db.Column(db.String(128), nullable=False)
     documentcode = db.Column(db.String(128), nullable=False)
@@ -42,8 +44,9 @@ class Document(db.Model):
             'documentprice': self.documentprice
         }
 
+
 class Documententity(db.Model):
-    __tablename__= 'documententity'
+    __tablename__ = 'documententity'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     document_id = db.Column(db.Integer, db.ForeignKey('document.id'))
     entity_id = db.Column(db.Integer, db.ForeignKey('entity.id'))
@@ -57,15 +60,16 @@ class Documententity(db.Model):
             'entity_id': self.entity_id
         }
 
+
 class Entity(db.Model):
-    __tablename__= 'entity'
+    __tablename__ = 'entity'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     entityname = db.Column(db.String(256), nullable=False)
     entityplace = db.Column(db.String(128), nullable=False)
     entitycode = db.Column(db.String(128), nullable=False)
 
     def to_json(self):
-        return { 
+        return{
             'id': self.id,
             'entityname': self.entityname,
             'entityplace': self.entityplace,
