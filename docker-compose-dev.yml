@@ -15,10 +15,10 @@ services:
       - APP_SETTINGS=project.config.DevelopmentConfig
       - DATABASE_URL=postgres://postgres:postgres@document-db:5432/documents_dev
       - DATABASE_TEST_URL=postgres://postgres:postgres@document-db:5432/documents_test
-    depends_on:  # nuevo
+    depends_on:
       - document-db
 
-  document-db:  # nuevo
+  document-db:
     build:
       context: ./services/documents/project/db
       dockerfile: Dockerfile
